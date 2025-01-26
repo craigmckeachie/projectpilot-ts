@@ -51,15 +51,35 @@ function convertToProjectModel(item: any): Project {
 
 const projectAPI = {
   get(page = 1, limit = 20) {
-    return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-    //   .then(delay(600))
+    return (
+      fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
+        //   .then(delay(600))
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(convertToProjectModels)
+        .catch((error: TypeError) => {
+          console.log('log client error ' + error);
+          throw new Error(
+            'There was an error retrieving the projects. Please try again.'
+          );
+        })
+    );
+  },
+
+  put(project: Project) {
+    return fetch(`${url}/${project.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(project),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then(checkStatus)
       .then(parseJSON)
-      .then(convertToProjectModels)
       .catch((error: TypeError) => {
         console.log('log client error ' + error);
         throw new Error(
-          'There was an error retrieving the projects. Please try again.'
+          'There was an error updating the project. Please try again.'
         );
       });
   },
