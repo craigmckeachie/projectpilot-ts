@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { projectAPI } from './projectAPI';
 import ProjectDetail from './ProjectDetail';
 import { Project } from './Project';
 import { useParams } from 'react-router';
 
-function ProjectPage(props: any) {
+function ProjectPage() {
   const [loading, setLoading] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [error, setError] = useState<string | null>(null);
