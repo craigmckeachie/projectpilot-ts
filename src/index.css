@@ -1,1 +1,7 @@
 @import '../node_modules/mini.css/dist/mini-default.min.css';
+
+/* import of mini.css here */
+
+form {
+  min-width: 300px;
+}
