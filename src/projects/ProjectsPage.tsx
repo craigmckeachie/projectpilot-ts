@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { useProjects } from "./projectHooks";
 import ProjectList from "./ProjectList";
 
 function ProjectsPage() {
-  const { data, isPending, error, isError, isFetching, page, setPage, isPreviousData } = useProjects();
+  const { data, isPending, error, isError, isFetching, page, setPage, isPlaceholderData } = useProjects();
+  
 
   return (
     <>
@@ -23,7 +23,7 @@ function ProjectsPage() {
                 <button
                   className="button"
                   onClick={() => {
-                    if (!isPreviousData) {
+                    if (!isPlaceholderData) {
                       setPage((oldPage) => oldPage + 1);
                     }
                   }}
